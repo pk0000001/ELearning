@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react"; // Icons
+
 import LoginPopup from "./LoginPopup";
 import RegisterPopup from "./RegisterPopup";
 
@@ -27,7 +28,10 @@ export default function NavBar() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-  }, []);
+  }, [isLoginOpen]);
+
+  
+  // Logout functionality
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
@@ -70,7 +74,8 @@ export default function NavBar() {
 
       {/* Navigation Links (Desktop) */}
       <div className="hidden sm:flex space-x-6">
-        {["Home", "Dashboard", "All Courses", "Mock Test"].map((item, index) => (
+        {!isLoggedIn ? (<>
+          {["Home", "All Courses", "Mock Test"].map((item, index) => (
           <NavLink
             key={index}
             to={item === "Home" ? "/" : `/${item.replace(" ", "")}`}
@@ -83,6 +88,22 @@ export default function NavBar() {
             {item}
           </NavLink>
         ))}
+        </>):(<>
+          {["Home", "Dashboard", "All Courses", "Mock Test"].map((item, index) => (
+          <NavLink
+            key={index}
+            to={item === "Home" ? "/" : `/${item.replace(" ", "")}`}
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-md transition ${
+                isActive ? "bg-blue-600 text-white" : "hover:bg-blue-800 hover:text-white"
+              }`
+            }
+          >
+            {item}
+          </NavLink>
+        ))}
+        </>)}
+        
       </div>
 
       {/* Buttons (Desktop) */}

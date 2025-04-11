@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FeedbackSection from "./FeedbackSection";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [imageUrls] = useState([
@@ -44,11 +45,11 @@ export default function Home() {
               className="bg-gray-100 w-full h-64 rounded-lg flex flex-col items-center p-2 transition transform hover:scale-105 hover:shadow-xl"
             >
               <div className="w-full h-3/5 bg-gray-300 flex rounded-md items-center justify-center">
-                <img
+                <Link to={"/coursediscription"}><img
                   src="https://apkasiddharth.in/wp-content/uploads/2025/01/20241029_153522-1.jpg"
                   alt="Course"
                   className="w-full h-full object-cover rounded-t-md"
-                />
+                /></Link>
               </div>
               <div className="w-full h-2/5 p-2 flex flex-col items-center">
                 <h3 className="text-md font-semibold">Course {item}</h3>

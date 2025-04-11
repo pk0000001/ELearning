@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
-import { Link } from "react-router-dom";
 import RegisterPopup from "./RegisterPopup";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -12,6 +11,39 @@ export default function LoginPopup({ isOpen, onClose }) {
   // Hooks must be called at the top level
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState(null);
+  
+// Check if user is authenticated on load
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  axios.get('http://localhost:5000/api/user', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true,
+  })
+  .then(res => {
+    setUser(res.data);
+  })
+  .catch((err) => {
+    console.error("Error fetching user:", err);
+  });
+}, []);
+
+
+useEffect(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  const role = urlParams.get("role");
+
+  if (token) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("role", role);
+    navigate("/"); // Redirect to homepage or dashboard
+  }
+}, []);
 
   // useForm hook should be here, not after the return statement
   const {
@@ -23,15 +55,21 @@ export default function LoginPopup({ isOpen, onClose }) {
   const onSubmit = async (data) => {
     try {
       console.log("Login Data:", data);
-      const response = await axios.post("http://localhost:5000/api/login", data);
+      const response = await axios.post("http://localhost:5000/api/login", data, { withCredentials: true,});
       alert("Login successful! Token: " + response.data.token);
       localStorage.setItem("token", response.data.token); // Store token for authentication
       onClose();
+      window.location.reload(); // Optional: Refresh to reflect logged-in UI
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.open("http://localhost:5000/api/google", "_self");
+  };
+
+  
   // Conditional return must come after all hooks
   if (!isOpen) return null;
 
@@ -56,7 +94,7 @@ export default function LoginPopup({ isOpen, onClose }) {
 
         {/* Social Login Buttons */}
         <div className="mt-4 space-y-2">
-          <button className="w-full flex items-center text-zinc-800 justify-center gap-2 p-2 border rounded-md hover:bg-gray-100">
+        <button onClick={handleGoogleLogin} className="w-full flex items-center text-zinc-800 justify-center gap-2 p-2 border rounded-md hover:bg-gray-100" >
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" className="w-5 h-5" />
             Continue with Google
           </button>

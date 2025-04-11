@@ -21,6 +21,7 @@ import ChapterUpload from '../admin/ChapterUpload';
 import QuizManager from '../admin/QuizManager';
 import StudentList from '../admin/StudentList';
 import ProtectedRoute from './ProtectedRoute';
+import CoursePage from '../coursesDiscription/CoursePage';
 
 
 const Router = () => {
@@ -39,6 +40,7 @@ const Router = () => {
           <Route path="/PrivacyPolicy" element={<Legal />} />
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/coursediscription" element={<CoursePage />} />
           
           <Route path="/AdminLogin" element={<AdminLogin />} />
 

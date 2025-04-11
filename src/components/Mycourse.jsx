@@ -3,7 +3,7 @@ import DNav from "./DNav";
 
 const MyCourse = () => {
   const [activeTab, setActiveTab] = useState("Maths");
-  const subjects = ["Maths", "Eng (Gopal Sir)", "Eng (Arun Sir)", "Reas", "GK/GS (Yash Sir)", "Geo (Vivek Sir)", "His/Polity (Abhishek Sir)"];
+  const subjects = ["VITEEE Previous Year Lectures", "Clock 2025", "Calendar 2025", "Direction 2025", "Coding Decoding", "Heights and Distance", "Number Series","Syllogism","Viteee Questions Discussion","Data Sufficiency","Data Interpretation","English"];
   const [chapters, setChapters] = useState([]);
   
 
@@ -38,7 +38,7 @@ const MyCourse = () => {
         <button className="bg-gray-300 px-4 py-2 rounded">Notes</button>
       </div>
 
-      <div className="flex gap-4 mt-4 border-b">
+      <div className="flex overflow-x-scroll gap-4 mt-4 mx-auto border-b">
         {subjects.map((subject) => (
           <button
             key={subject}

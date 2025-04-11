@@ -33,8 +33,8 @@ export default function MockTest() {
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center max-sm:items-start mt-24 p-4 max-md:w-screen max-sm:min-w-2xl md:p-1 ">
-      <h1 className="text-2xl sm:text-3xl sm:px-4 font-bold mb-8">Mock Tests</h1>
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center max-md:items-center mt-24 p-4  max-md:w-screen max-sm:min-w-2xl md:p-1 ">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-8">Mock Tests</h1>
 
       {/* Responsive Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-screen max-md:w-auto  sm:gap-2 max-w-5xl px-4 sm:px-1">
