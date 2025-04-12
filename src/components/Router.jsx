@@ -22,6 +22,7 @@ import QuizManager from '../admin/QuizManager';
 import StudentList from '../admin/StudentList';
 import ProtectedRoute from './ProtectedRoute';
 import CoursePage from '../coursesDiscription/CoursePage';
+import Video from './video';
 
 
 const Router = () => {
@@ -32,6 +33,7 @@ const Router = () => {
           
           
           <Route path="/Mocktest" element={<Mocktest />} />
+          <Route path="/video" element={<Video />} />
           
           <Route path="Mocktest/:test" element={<TestPage />} />
           <Route path="/allcourses" element={<Allcourses />} />
