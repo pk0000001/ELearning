@@ -7,7 +7,7 @@ const App = () => {
   const location = useLocation();
 
   // Check if current route is `/video`
-  const hideNavBar = location.pathname === "/video";
+  const hideNavBar = location.pathname.startsWith("/Lclass/");
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const QuizManager = () => {
+const QuizManager = ({courseId}) => {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState('');
   const [options, setOptions] = useState(['', '', '', '']);
@@ -17,12 +17,14 @@ const QuizManager = () => {
     setIsLoading(true);
     setMessage('');
 
+
     try {
       const question = {
         id: Date.now(),
         question: newQuestion,
         options: [...options],
         correctAnswer,
+        courseId: courseId,
       };
 
       const response = await fetch('http://localhost:5000/api/quiz', {
@@ -53,7 +55,7 @@ const QuizManager = () => {
   return (
     <div className="bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Quiz Manager</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Quiz Manager for {courseId}</h3>
         
         {message && (
           <div className={`mt-2 p-2 rounded ${message.includes('success') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>

@@ -23,6 +23,8 @@ import StudentList from '../admin/StudentList';
 import ProtectedRoute from './ProtectedRoute';
 import CoursePage from '../coursesDiscription/CoursePage';
 import Video from './video';
+import Quiz from '../quiz/Quiz';
+import AfterAdminDashboard from '../admin/AfterAdminDashboard';
 
 
 const Router = () => {
@@ -33,7 +35,7 @@ const Router = () => {
           
           
           <Route path="/Mocktest" element={<Mocktest />} />
-          <Route path="/video" element={<Video />} />
+          <Route path="Lclass/:video" element={<Video />} />
           
           <Route path="Mocktest/:test" element={<TestPage />} />
           <Route path="/allcourses" element={<Allcourses />} />
@@ -43,12 +45,15 @@ const Router = () => {
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/coursediscription" element={<CoursePage />} />
+          <Route path="/AllCourses/:coursediscription" element={<CoursePage />} />
+        
           
           <Route path="/AdminLogin" element={<AdminLogin />} />
 
 
           <Route element={<Protection />}>
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="AdminDashboard/:courseId" element={<AfterAdminDashboard />} />
           <Route path="/chapters" element={<ChapterUpload />} />
           <Route path="/quiz" element={<QuizManager />} />
           <Route path="/students" element={<StudentList />} />
@@ -57,7 +62,8 @@ const Router = () => {
         <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/myprofile" element={<MyProfile />} />
           <Route path="/pquiz" element={<Practicequiz />} />
-          <Route path="/MyCourse" element={<MyCourse />} />
+          <Route path="/qquiz" element={<Quiz />} />
+          <Route path="MyCourses/:courseId" element={<MyCourse />} />
         </Route>
         </Routes>
     </div>

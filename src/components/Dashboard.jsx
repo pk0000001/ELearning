@@ -38,10 +38,17 @@
 //     );
 //   }**************************************************************************
   
+import { useEffect } from "react";
 import MyCourses from "./Courses";
 import DNav from "./DNav";
 
 export default function Dashboard() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <div className="bg-gray-100 pt-20 min-h-screen flex flex-col lg:flex-row">
       {/* Sidebar */}

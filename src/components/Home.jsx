@@ -2,6 +2,7 @@ import { useState } from "react";
 import FeedbackSection from "./FeedbackSection";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import FAQSection from "./FAQSection";
 
 export default function Home() {
   const [imageUrls] = useState([
@@ -10,6 +11,13 @@ export default function Home() {
     "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980693-300x300-1.png",
     "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980693-300x300-1.png",
   ]);
+  const course =[
+    {src:"https://apkasiddharth.in/wp-content/uploads/2025/01/20241029_153522-1.jpg", url:"/AllCourses/Manipal", name:"Manipal"},
+    {src:"https://apkasiddharth.in/wp-content/uploads/2025/01/20241029_153522-1.jpg", url:"/AllCourses/VIT", name:"VIT"},
+    {src:"https://apkasiddharth.in/wp-content/uploads/2025/01/20241029_153522-1.jpg", url:"/AllCourses/BITSAT", name:"BITSAT"},
+    {src:"https://apkasiddharth.in/wp-content/uploads/2025/01/20241029_153522-1.jpg", url:"/AllCourses/COMEDK", name:"COMEDK"}
+    
+  ];
 
   return (
     <div className="bg-white min-h-screen  max-sm:min-h-1/2 flex flex-col items-center">
@@ -39,28 +47,30 @@ export default function Home() {
       {/* Course Cards Section */}
       <div className="bg-white shadow-md p-6 md:p-10 lg:p-20 mt-6 rounded-md w-full max-w-6xl flex justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((item) => (
+          {course.map((item,index) => (
             <div
-              key={item}
+              key={index}
               className="bg-gray-100 w-full h-64 rounded-lg flex flex-col items-center p-2 transition transform hover:scale-105 hover:shadow-xl"
             >
               <div className="w-full h-3/5 bg-gray-300 flex rounded-md items-center justify-center">
-                <Link to={"/coursediscription"}><img
-                  src="https://apkasiddharth.in/wp-content/uploads/2025/01/20241029_153522-1.jpg"
+                <Link to={item.url}><img
+                  src={item.src}
                   alt="Course"
                   className="w-full h-full object-cover rounded-t-md"
                 /></Link>
               </div>
               <div className="w-full h-2/5 p-2 flex flex-col items-center">
-                <h3 className="text-md font-semibold">Course {item}</h3>
+                <h3 className="text-md font-semibold">Course {item.name}</h3>
                 <p className="text-sm text-gray-600 mt-1 text-center">
-                  This is a brief description of Course {item}.
+                  This is a brief description of Course {item.name}.
                 </p>
               </div>
             </div>
           ))}
         </div>
       </div>
+      {/* faq section */}
+      <FAQSection />
 
       {/* Feedback Section */}
       <FeedbackSection />

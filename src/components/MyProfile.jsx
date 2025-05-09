@@ -87,16 +87,48 @@
 
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DNav from './DNav';
 
 export default function MyProfile() {
   // Sample user data
   const [user, setUser] = useState({
-    name: "Prince Kumar",
-    email: "princekumarmandalkatihar@gmail.com",
-    phone: "+917903367144",
+    fullName: "", email: "",
+    phone: "+917903367144"
   });
+
+
+useEffect(() => {
+    // Fetch user info using token from localStorage
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:5000/api/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // if using cookies
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          setUser({
+            fullName: data.fullName || "User",
+            email: data.email,
+            image: data.image || `https://ui-avatars.com/api/?name=${data.fullName || "User"}&background=random`
+          });
+        } else {
+          console.error("User not authenticated");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   return (
     <div className="bg-gray-100 w-full min-h-screen pt-20 flex">
@@ -110,7 +142,7 @@ export default function MyProfile() {
       <div className="space-y-4">
         <div className="flex justify-between border-b pb-2">
           <span className="text-gray-600 font-medium">Name:</span>
-          <span className="text-gray-800">{user.name}</span>
+          <span className="text-gray-800">{user.fullName}</span>
         </div>
 
         <div className="flex justify-between border-b pb-2">

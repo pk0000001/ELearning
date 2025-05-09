@@ -5,6 +5,7 @@
 //     { name: "Comedk", img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980668-300x300-1-150x150.png" },
 //   ];
 
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //   return (
@@ -31,6 +32,9 @@ export default function MockTest() {
     { name: "Manipal", img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980693-300x300-1.png", url:"/Mocktest/Manipal" },
     { name: "Comedk", img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980668-300x300-1-150x150.png", url:"/Mocktest/COMEDK" },
   ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center max-md:items-center mt-24 p-4  max-md:w-screen max-sm:min-w-2xl md:p-1 ">

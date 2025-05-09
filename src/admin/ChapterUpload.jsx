@@ -1,22 +1,26 @@
 import { useState } from 'react';
 
-const ChapterUpload = () => {
+const ChapterUpload = ({courseId}) => {
   const [chapterTitle, setChapterTitle] = useState('');
   const [chapterContent, setChapterContent] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
-
+ 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage('');
+   
 
     try {
       const formData = {
         title: chapterTitle,
         content: chapterContent,
         youtubeLink,
+        courseId: courseId,
+        
       };
 
       const response = await fetch('http://localhost:5000/api/chapters', {
@@ -46,7 +50,7 @@ const ChapterUpload = () => {
   return (
     <div className="bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Upload New Chapter</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Upload New Chapter {courseId}</h3>
         {message && (
           <div className={`mt-2 p-2 rounded ${message.includes('success') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
             {message}

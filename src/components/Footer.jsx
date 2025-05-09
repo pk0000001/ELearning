@@ -48,7 +48,6 @@ const Footer = () => {
       {/* Copyright Text */}
       <p className="text-white bottom-1 text-md mt-6">Copyright © 2025 Apka Siddharth</p>
       <Link to={"/AdminLogin"}>Admin</Link>
-      <Link to={"/video"}>video</Link>
     </footer>
   
 

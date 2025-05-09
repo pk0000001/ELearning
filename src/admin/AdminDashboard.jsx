@@ -1,74 +1,35 @@
-import { useState } from 'react';
-import ChapterUpload from './ChapterUpload';
-import QuizManager from './QuizManager';
-import StudentList from './StudentList';
-import { Outlet } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const AdminDashboard = () => {
-  
-  const [activeTab, setActiveTab] = useState('chapters');
+  const mockTests = [
+    { name: "VIT", img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980681-300x300-1-150x150.png", url:"/AdminDashboard/VIT" },
+    { name: "Manipal", img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980693-300x300-1.png", url:"/AdminDashboard/Manipal" },
+    { name: "Comedk", img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980668-300x300-1-150x150.png", url:"/AdminDashboard/COMEDK" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-gray-800">E-Learning Admin</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
-              <button
-                className={`${
-                  activeTab === 'chapters'
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-                onClick={() => setActiveTab('chapters')}
-              >
-                Chapters
-              </button>
-              <button
-                className={`${
-                  activeTab === 'quiz'
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-                onClick={() => setActiveTab('quiz')}
-              >
-                Quiz
-              </button>
-              <button
-                className={`${
-                  activeTab === 'students'
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-                onClick={() => setActiveTab('students')}
-              >
-                Students
-              </button>
-            </nav>
-          </div>
-
-          <div className="mt-6">
-            {activeTab === 'chapters' && <ChapterUpload />}
-            {activeTab === 'quiz' && <QuizManager />}
-            {activeTab === 'students' && <StudentList />}
-          </div>
-        </div>
+    
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center max-md:items-center mt-24 p-4  max-md:w-screen max-sm:min-w-2xl md:p-1 ">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-8">Courses Add</h1>
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-screen max-md:w-auto  sm:gap-2 max-w-5xl px-4 sm:px-1">
+        {mockTests.map((courseId, index) => (
+          <Link to={courseId.url}><div
+            key={index}
+            className="bg-white shadow-md rounded-lg flex flex-col items-center p-4 w-60 md:w-58 md:h-58 max-sm:min-w-40 sm:w-64 h-56 transition transform hover:scale-105 hover:shadow-lg"
+          >
+            <img src={courseId.img} alt={courseId.name} className="w-24 h-24 mb-4" />
+            <p className="text-lg font-semibold">{courseId.name}</p>
+            {/* <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+              Start Test
+            </button> */}
+          </div></Link>
+        ))}
       </div>
-      <Outlet />
     </div>
   );
-};
+ 
+}
 
-export default AdminDashboard;
+export default AdminDashboard

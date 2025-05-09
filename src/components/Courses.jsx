@@ -12,26 +12,46 @@ const courses = [
     level: "Basic",
     status: "Published",
     img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980693-300x300-1.png",
-  },
+    url: "Manipal",
+  },{id: 2,
+  title: "VIT",
+  date: "April 13, 2022 - 4:24 PM",
+  duration: "20h 10m",
+  price: "₹ 1,500",
+  level: "Basic",
+  status: "Published",
+  img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980681-300x300-1-150x150.png",
+  url: "VIT",
+},{id: 3,
+title: "BITSAT",
+date: "April 13, 2022 - 4:24 PM",
+duration: "20h 10m",
+price: "₹ 1,500",
+level: "Basic",
+status: "Published",
+img: "https://apkasiddharth.in/wp-content/uploads/2025/03/1725703980668-300x300-1-150x150.png",
+url: "BITSAT"
+},
 ];
 
 const MyCourses = () => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4 text-center sm:text-left">My Courses</h2>
-      <NavLink to={"/Mycourse"}>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        {/* Table Headers */}
-        <div className="hidden md:grid grid-cols-4 bg-gray-100 p-4 font-semibold text-gray-600">
+       {/* Table Headers */}
+       <div className="hidden md:grid grid-cols-4 shadow-md rounded-lg bg-gray-200 p-4 mb-4 overflow-hidden font-semibold text-gray-600">
           <span className="text-left">COURSE</span>
           <span className="text-center">DURATION</span>
           <span className="text-center">PRICE</span>
           <span className="text-center">LEVEL</span>
         </div>
+      
+      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+       
 
         {/* Course Items */}
         {courses.map((course) => (
-          <div key={course.id} className="flex flex-col md:flex-row items-center border-b p-4 hover:bg-gray-50">
+          <NavLink to={`/MyCourses/${course.url}`}><div key={course.id} className="flex flex-col md:flex-row items-center border-b p-4 hover:bg-gray-50">
             {/* Course Image */}
             <img src={course.img} alt={course.title} className="w-16 h-16 rounded-lg mb-2 md:mb-0 md:mr-4" />
 
@@ -54,9 +74,9 @@ const MyCourses = () => {
                 <span className="text-blue-500 font-semibold">{course.level}</span>
               </div>
             </div>
-          </div>
+          </div></NavLink>
         ))}
-      </div></NavLink>
+      </div>
     </div>
   );
 };
